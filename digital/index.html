@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  AUGUST 2026 FEATURED RESOURCE — HEBREWS: CHRIST IS BETTER (DIGITAL TRANSCRIPT BOOK)
+  featured.jdgreear.com
+
+  OFFER STRUCTURE (from August campaign doc + scripting assets):
+  - Digital resource — complete sermon transcripts from J.D.'s 10-message Hebrews study.
+  - Delivered instantly to the inbox. No shipping, no fulfillment window.
+  - Campaign copy states no gift minimum, so this page uses the standard digital
+    "any gift amount qualifies" language (NOT July's $45+ print threshold).
+  - Last day to request: Monday, August 31.
+
+  OPEN TODOs (Daniel):
+  - RESOLVED: Classy campaign ID is '614304' (August). Confirmed distinct from July's '614307'.
+  - TODO: Confirm "any gift amount qualifies" is the approved phrasing for August.
+  - TODO: Chapter list below was derived by me from the ebook's contents page — confirm the
+    10 sermon titles and passages match the final published version.
+  - TODO: Hero mockup is a 996x996 square (hebrews-christ-is-better.jpg). A wider crop would
+    fill the hero column better if design has one.
+  - TODO: Decide whether the "Praying Paul's Prayers" free opt-in gets a mention here
+    (currently omitted — this page has one job: the premium ask).
+-->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hebrews: Christ Is Better — Sermon Transcripts from J.D. Greear | August 2026 Featured Resource</title>
+  <meta name="description" content="When your faith feels tired, Christ is better. Request Hebrews: Christ Is Better — the complete transcripts from Pastor J.D. Greear's 10-message study through Hebrews — with your gift to Summit Life." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SZFNH3YSWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SZFNH3YSWC');
+  </script>
+
+  <!-- Start Humblytics Tracking Code -->
+  <script>
+    (function(){
+      document.documentElement.style.opacity='0';
+      window._hmblReveal=function(){
+        document.documentElement.style.opacity='1'; };
+      setTimeout(window._hmblReveal, 2000);
+    })();
+  </script>
+  <script async src="https://app.humblytics.com/hmbl.min.js?id=7be9849"></script>
+  <!-- End Humblytics Tracking Code -->
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ──────────────────────────────────────────────────────────────
+       THEME TOKENS
+
+       Tokens are named for the ROLE they play, not the color they are,
+       so a whole palette can be swapped without touching layout code.
+
+       Default palette = JDGM navy/orange branding.
+       To use an alternate palette for a month, add the attribute to the body tag:
+           <body data-theme="earthtone">
+       Remove the attribute to fall back to navy. Layout code never changes.
+       ────────────────────────────────────────────────────────────── */
+    :root {
+      /* Typography */
+      --font-display:         'Merriweather', serif;
+      --font-body:            'Open Sans', sans-serif;
+      --h1-weight:            900;
+      --h1-tracking:          -0.01em;
+      --h1-leading:           1.04;
+      --h1-em-weight:         900;
+      --heading-weight:       900;   /* h2 / h3 */
+      --title-weight:         700;   /* toc titles, footer wordmark */
+
+      /* Brand mark (inline SVG logo is two-tone) */
+      --logo-primary:         #ffffff;
+      --logo-secondary:       #bcdaed;
+
+      /* Dark surfaces */
+      --hero-bg:              radial-gradient(ellipse at 80% 20%, rgba(232,98,42,0.14) 0%, transparent 55%),
+                              linear-gradient(180deg, #122540 0%, #0c1a2e 100%);
+      --surface-trust:        #122540;   /* trust strip band   */
+      --surface-deep:         #1c3a5e;   /* final CTA band     */
+      --surface-footer:       #0c1a2e;   /* footer             */
+
+      /* Light surfaces */
+      --surface-band:         #f7f5f2;   /* donation section   */
+      --surface-page:         #ffffff;   /* page + inside sect */
+
+      /* Accent */
+      --accent:               #e8622a;
+      --accent-quiet:         #e8622a;   /* secondary UI: trust icons */
+      --cta-bg:               #e8622a;
+      --cta-bg-hover:         #cf5221;
+      --cta-glow:             rgba(232,98,42,0.45);
+      --on-accent:            #ffffff;   /* text/arrow on the CTA */
+      --badge-bg:             rgba(232,98,42,0.12);
+      --badge-border:         rgba(232,98,42,0.35);
+      --tag-bg:               #e8622a;   /* corner badge on the art */
+      --tag-text:             #ffffff;
+
+      /* Text on dark surfaces */
+      --on-dark:              #ffffff;
+      --on-dark-body:         #d6e2f0;
+      --on-dark-band:         #c8d8e8;
+      --on-dark-trust:        #b8c8d8;
+      --on-dark-meta:         #90aac4;
+      --on-dark-footer:       #7090b0;
+      --on-dark-footer-hover: #a8c4e0;
+
+      /* Text on light surfaces */
+      --heading:              #1c3a5e;
+      --text:                 #1a1a1a;
+      --muted:                #6b6b6b;
+      --border:               #ddd8d0;
+      --credit:               #8a8580;
+
+      /* Trim */
+      --trust-border:         rgba(255,255,255,0.08);
+      --art-shadow:           -12px 20px 60px rgba(0,0,0,0.6);
+      --art-ring:             rgba(255,255,255,0.05);
+    }
+
+    /* ──────────────────────────────────────────────────────────────
+       EARTHTONE — palette drawn from the Hebrews "Christ Is Better"
+       cover art (Gainsborough woodland: umber ground, olive canopy,
+       sage highlight, parchment panel, warm ochre path light).
+       Use for months whose resource has a strong visual identity of
+       its own that's worth matching.
+       ────────────────────────────────────────────────────────────── */
+    [data-theme="earthtone"] {
+      --font-display:         'Fraunces', serif;
+      --h1-weight:            600;
+      --h1-tracking:          normal;
+      --h1-leading:           1.08;
+      --h1-em-weight:         500;
+      --heading-weight:       600;
+      --title-weight:         600;
+
+      --logo-primary:         #efe7d3;   /* parchment */
+      --logo-secondary:       #9c9b72;   /* sage      */
+
+      --hero-bg:              radial-gradient(ellipse at 75% 20%, rgba(156,155,114,0.10) 0%, transparent 55%),
+                              linear-gradient(160deg, #2b2a20 0%, #1f1e16 100%);
+      --surface-trust:        #302e20;   /* olive-cast band */
+      --surface-deep:         #2b2a20;
+      --surface-footer:       #1f1e16;
+
+      --surface-band:         #e7dcc4;
+      --surface-page:         #efe7d3;
+
+      --accent:               #b8834a;   /* ochre */
+      --accent-quiet:         #9c9b72;   /* sage — trust icons read olive, not ochre */
+      --cta-bg:               linear-gradient(135deg, #b8834a, #93672f);
+      --cta-bg-hover:         linear-gradient(135deg, #93672f, #7a5527);
+      --cta-glow:             rgba(184,131,74,0.28);
+      --on-accent:            #211c12;   /* ink — dark type on the ochre CTA */
+      --badge-bg:             transparent;
+      --badge-border:         #b8834a;
+      --tag-bg:               #93672f;
+      --tag-text:             #efe7d3;
+
+      --on-dark:              #efe7d3;
+      --on-dark-body:         #d9d2be;
+      --on-dark-band:         #d9d2be;
+      --on-dark-trust:        #c6c2a4;
+      --on-dark-meta:         #9a927c;
+      --on-dark-footer:       #857c66;
+      --on-dark-footer-hover: #b5ac92;
+
+      --heading:              #211c12;
+      --text:                 #2a2418;
+      --muted:                #726a52;
+      --border:               #cfc3a6;   /* sage-derived dividers */
+      --credit:               #8a8270;
+
+      --trust-border:         rgba(156,155,114,0.18);
+      --art-shadow:           0 30px 60px rgba(0,0,0,0.45);
+      --art-ring:             rgba(239,231,211,0.06);
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--text);
+      background: var(--surface-page);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--hero-bg);
+      color: var(--on-dark);
+      padding: 32px 24px 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-logo {
+      display: flex;
+      justify-content: center;
+      max-width: 1180px;
+      margin: 0 auto 40px;
+    }
+    .hero-logo a {
+      display: inline-flex;
+      align-items: center;
+    }
+    .hero-logo svg {
+      height: 38px;
+      width: auto;
+      display: block;
+    }
+    .hero-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .hero-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+      padding: 6px 12px;
+      background: var(--badge-bg);
+      border: 1px solid var(--badge-border);
+      border-radius: 3px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5.6vw, 72px);
+      font-weight: var(--h1-weight);
+      line-height: var(--h1-leading);
+      color: var(--on-dark);
+      margin-bottom: 24px;
+      letter-spacing: var(--h1-tracking);
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: var(--h1-em-weight);
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: 19px;
+      line-height: 1.55;
+      color: var(--on-dark-body);
+      margin-bottom: 32px;
+      max-width: 520px;
+      font-weight: 400;
+    }
+    .hero-sub strong { color: var(--on-dark); font-weight: 700; }
+    .hero-sub em { font-style: italic; color: var(--accent); font-weight: 600; }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 22px 40px;
+      background: var(--cta-bg);
+      color: var(--on-accent);
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      box-shadow: 0 8px 28px var(--cta-glow);
+    }
+    .hero-cta:hover {
+      background: var(--cta-bg-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px var(--cta-glow);
+    }
+    .hero-cta svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--on-accent);
+    }
+    .hero-meta {
+      display: block;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--on-dark-meta);
+      letter-spacing: 0.02em;
+    }
+
+    /* Resource image */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+    .book-cover-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    .book-cover-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow:
+        var(--art-shadow),
+        0 0 0 1px var(--art-ring);
+    }
+    .book-badge {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 10px 16px;
+      border-radius: 3px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+    }
+
+    /* ── TRUST STRIP ── */
+    .trust {
+      background: var(--surface-trust);
+      padding: 18px 24px;
+      border-top: 1px solid var(--trust-border);
+    }
+    .trust-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--on-dark-trust);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.02em;
+    }
+    .trust-icon {
+      width: 16px;
+      height: 16px;
+      fill: var(--accent-quiet);
+      flex-shrink: 0;
+    }
+
+    /* ── DONATION SECTION (THE CLIMAX) ── */
+    .donation-section {
+      background: var(--surface-band);
+      padding: 100px 24px 120px;
+      position: relative;
+    }
+    .donation-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 5px;
+      background: var(--accent);
+    }
+    .donation-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 45fr 55fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .donation-copy { text-align: left; }
+    .donation-form { display: flex; flex-direction: column; justify-content: center; width: 100%; }
+    .donation-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .donation-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.4vw, 44px);
+      font-weight: var(--heading-weight);
+      color: var(--heading);
+      line-height: 1.1;
+      margin-bottom: 22px;
+      letter-spacing: -0.01em;
+    }
+    .donation-section h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .donation-lead {
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0 0 32px;
+    }
+    .donation-lead strong { color: var(--heading); font-weight: 700; }
+    .donation-lead em { font-style: italic; }
+
+    /* Classy embed — fills its column. Constrained hard because the GoFundMe Pro
+       widget can render at a fixed desktop width and blow out the whole page's
+       horizontal bounds on mobile if not clamped. */
+    #classy-embed {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+    #classy-embed,
+    #classy-embed * {
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    .donation-assurance {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .donation-assurance span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .donation-assurance svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .form-reassurance {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── INSIDE THE BOOK ── */
+    .inside {
+      background: var(--surface-page);
+      padding: 90px 24px;
+    }
+    .inside-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .inside-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 56px;
+    }
+    .inside-header .donation-label { color: var(--accent); }
+    .inside-verse {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 18px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 620px;
+      margin: 0 auto 28px;
+    }
+    .inside-verse cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .inside-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 3.8vw, 46px);
+      font-weight: var(--heading-weight);
+      color: var(--heading);
+      line-height: 1.15;
+      margin: 14px 0 16px;
+      letter-spacing: -0.01em;
+    }
+    .inside-header h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .inside-header p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* Roman-numeral table of contents */
+    .toc-list {
+      list-style: none;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .toc-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 20px 4px;
+      border-bottom: 1px solid var(--border);
+    }
+    .toc-list li:first-child { border-top: 1px solid var(--border); }
+    .toc-num {
+      flex-shrink: 0;
+      width: 46px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .toc-title {
+      font-family: var(--font-display);
+      font-weight: var(--title-weight);
+      font-size: 19px;
+      color: var(--heading);
+      line-height: 1.4;
+    }
+    .toc-ref {
+      display: block;
+      margin-top: 5px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── FINAL CTA BAR ── */
+    .final-cta {
+      background: var(--surface-deep);
+      padding: 64px 24px;
+      text-align: center;
+      color: var(--on-dark);
+    }
+    .final-cta h3 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.4vw, 40px);
+      font-weight: var(--heading-weight);
+      line-height: 1.15;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+    .final-cta h3 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .final-cta p {
+      font-size: 17px;
+      color: var(--on-dark-band);
+      margin-bottom: 32px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface-footer);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-weight: var(--title-weight);
+      font-size: 16px;
+      color: var(--on-dark);
+      margin-bottom: 10px;
+    }
+    footer p {
+      font-size: 12px;
+      color: var(--on-dark-footer);
+      line-height: 1.7;
+    }
+    footer a {
+      color: var(--on-dark-footer);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--on-dark-footer-hover); }
+
+    .site-credit {
+      text-align: center;
+      font-size: 13px;
+      color: var(--credit);
+      padding: 22px 24px 28px;
+      background: var(--surface-page);
+      margin: 0;
+    }
+    .site-credit a {
+      color: var(--credit);
+      text-decoration: underline;
+    }
+    .site-credit a:hover { color: var(--heading); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        text-align: center;
+      }
+      .hero-visual { order: -1; }
+      .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-cta { width: 100%; justify-content: center; }
+      .book-cover-wrap { max-width: 340px; margin: 0 auto; }
+      .trust-inner { gap: 22px; }
+      .toc-list li { gap: 14px; padding: 16px 4px; }
+      .toc-num { width: 34px; font-size: 15px; }
+      .toc-title { font-size: 17px; }
+      .donation-section { padding: 60px 20px 70px; }
+      .donation-inner { grid-template-columns: 1fr; gap: 40px; }
+      .donation-copy { text-align: center; }
+      .donation-assurance { align-items: center; }
+      .inside { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-logo">
+      <a href="https://jdgreear.com" aria-label="J.D. Greear Ministries">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 647.39 112" aria-hidden="true"><g><path d="M244.44,63.68l5.41-9.51a13.14,13.14,0,0,0,9.25,4.19,8.62,8.62,0,0,0,9.09-8.13v0a7.75,7.75,0,0,0,0-1.18V10.11h12.38V49.19c0,13.79-8.54,20.12-20.5,20.12A21.55,21.55,0,0,1,244.44,63.68Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M283.09,62.18a7.07,7.07,0,1,1,7.08,7.07h0A7.16,7.16,0,0,1,283.09,62.18Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M303.56,68.31V10.11h23c18.2,0,30.9,11.6,30.9,29.14s-12.66,29.07-30.9,29.07Zm41.19-29.07c0-10.3-6.29-18.2-18.2-18.2H316v36.4h10.54a17.41,17.41,0,0,0,18.2-16.58V39.24Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M355.4,62.18a7.07,7.07,0,1,1,7.08,7.07h0A7.15,7.15,0,0,1,355.4,62.18Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M383.15,39.26c0-18.4,14-30.1,31-30.1a27.23,27.23,0,0,1,24.09,13l-10.3,5.58a16.47,16.47,0,0,0-13.79-7.58,18.13,18.13,0,0,0-18.26,18v1.12A18.14,18.14,0,0,0,413,58.35h1.13a19.62,19.62,0,0,0,12.39-4.44v-7H411.17V36.11H439V58.45a32.3,32.3,0,0,1-24.78,11C397.11,69.45,383.15,57.58,383.15,39.26Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M448.44,68.3V26.14h11.09v5.75A18.13,18.13,0,0,1,473,25.08V35.93a14.23,14.23,0,0,0-13.42,4.53V68.29Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M477.18,47.18a21.46,21.46,0,0,1,20.82-22h1c12.56,0,21.07,9.42,21.07,23.21V50.8H488.77a11.36,11.36,0,0,0,12.13,9.78,18.09,18.09,0,0,0,11.26-4.25L517,63.49a26.26,26.26,0,0,1-17.37,5.84,21.35,21.35,0,0,1-22.49-20.12ZM499,33.91a10.14,10.14,0,0,0-10.37,9.34h20.75a9.77,9.77,0,0,0-10.14-9.35Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M525.36,47.18a21.45,21.45,0,0,1,20.81-22h1c12.57,0,21.08,9.42,21.08,23.21V50.8H537a11.39,11.39,0,0,0,12.13,9.78,18.09,18.09,0,0,0,11.26-4.25l4.88,7.16a26.25,26.25,0,0,1-17.36,5.84,21.35,21.35,0,0,1-22.49-20.12A19.69,19.69,0,0,1,525.36,47.18Zm21.81-13.27a10.14,10.14,0,0,0-10.38,9.34h20.76a9.78,9.78,0,0,0-10.17-9.35Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M601.62,68.3V63.93a17.38,17.38,0,0,1-13.31,5.41A14,14,0,0,1,573.66,56v-.6c0-9.85,7.93-13.61,14.66-13.61a17.28,17.28,0,0,1,13.34,5.15V41.24c0-4.27-3.66-7.06-9.24-7.06a17.69,17.69,0,0,0-12.3,5l-4.26-7.41a27.53,27.53,0,0,1,18.41-6.63c9.58,0,18.41,3.83,18.41,16V68.3Zm0-10.13V52.94a11.13,11.13,0,0,0-8.9-3.67c-4.36,0-7.94,2.27-7.94,6.37,0,3.93,3.58,6.2,7.94,6.2A11.05,11.05,0,0,0,601.62,58.17Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M623.7,68.3V26.14h11.08v5.75a18.16,18.16,0,0,1,13.42-6.81V35.93a14.26,14.26,0,0,0-13.42,4.53V68.29Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/></g><path d="M272.86,114V90.23L263,114h-1.47L251.8,90.23V114h-3.59V85.12h5.15l8.95,21.71,9-21.71h5.15V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M285.08,88a2.19,2.19,0,1,1,4.37-.16.43.43,0,0,1,0,.16,2.19,2.19,0,0,1-2.26,2.1h0A2.2,2.2,0,0,1,285.08,88Zm.56,26V93.09h3.25V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M312.06,114V100.3c0-3.67-1.87-4.84-4.68-4.84a8,8,0,0,0-6.18,3.24V114H298V93.08h3.25v3a10.3,10.3,0,0,1,7.44-3.55,6,6,0,0,1,6.7,5.07v0a5.77,5.77,0,0,1,0,1.66V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M323.8,88A2.19,2.19,0,1,1,326,90.13h0A2.19,2.19,0,0,1,323.8,88Zm.57,26V93.09h3.23V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M334.86,111.2l1.68-2.33a9.46,9.46,0,0,0,6.88,3c3.2,0,4.93-1.52,4.93-3.59,0-2.29-2.55-2.88-5.36-3.59-3.54-.82-7.57-1.77-7.57-6.1,0-3.24,2.81-6,7.79-6a10.56,10.56,0,0,1,7.73,3l-1.51,2.24a8.13,8.13,0,0,0-6.23-2.63c-2.87,0-4.63,1.43-4.63,3.28s2.38,2.55,5.11,3.2c3.63.83,7.83,1.87,7.83,6.49,0,3.51-2.82,6.31-8.22,6.31A11.06,11.06,0,0,1,334.86,111.2Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M360,109.6V95.94h-3.46V93.06H360V87.31h3.24v5.75h4.23v2.88h-4.24v13c0,1.56.69,2.67,2.12,2.67a3.11,3.11,0,0,0,2.2-.87l1,2.42a5.31,5.31,0,0,1-3.9,1.34,4.26,4.26,0,0,1-4.64-3.83A3.62,3.62,0,0,1,360,109.6Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M374.67,114V93.08h3.25v3.37a8.89,8.89,0,0,1,7-3.83V96a6.23,6.23,0,0,0-1.3-.12,7.62,7.62,0,0,0-5.66,3.32V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M391,88a2.19,2.19,0,1,1,2.18,2.18h0A2.19,2.19,0,0,1,391,88Zm.56,26V93.09h3.27V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M402.63,103.5a10.44,10.44,0,0,1,9.93-10.93h.36c6.31,0,10,4.94,10,11.21v.82H406a7.37,7.37,0,0,0,7.51,7.22h0a9.21,9.21,0,0,0,6.45-2.64l1.55,2.11a11.25,11.25,0,0,1-8.3,3.2,10.35,10.35,0,0,1-10.65-10v0C402.6,104.13,402.61,103.81,402.63,103.5Zm10.24-8.26a7,7,0,0,0-6.83,7h13.71a6.77,6.77,0,0,0-6.58-6.94h-.3Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M428.93,111.2l1.7-2.33a9.42,9.42,0,0,0,6.87,3c3.2,0,4.93-1.52,4.93-3.59,0-2.29-2.55-2.88-5.36-3.59-3.55-.82-7.57-1.77-7.57-6.1,0-3.24,2.82-6,7.79-6a10.56,10.56,0,0,1,7.74,3l-1.52,2.24a8.1,8.1,0,0,0-6.22-2.63c-2.88,0-4.63,1.43-4.63,3.28s2.38,2.55,5.1,3.2c3.63.83,7.82,1.87,7.82,6.49,0,3.51-2.8,6.31-8.21,6.31A11.1,11.1,0,0,1,428.93,111.2Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M159.67,114,80.32,23,.8,114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M127.5,2.5,109.63,23.1,188.44,114h35.92Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/></svg>
+      </a>
+    </div>
+    <div class="hero-inner">
+
+      <div class="hero-copy">
+        <span class="hero-label">August 2026 Featured Resource</span>
+        <h1>When your faith feels tired, Christ is <em>better.</em></h1>
+        <p class="hero-sub">
+          The first readers of Hebrews faced the same things we do today: pressure, uncertainty, and the temptation to drift. The writer gave them one reminder: <strong>look to Jesus.</strong> This digital resource gathers the complete transcripts from Pastor J.D.'s 10-message study through Hebrews into one volume you can follow along with as you study the book of Hebrews.
+        </p>
+
+        <a href="#give" class="hero-cta">
+          Give a gift and receive the book.
+          <svg viewBox="0 0 24 24"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+        </a>
+        <span class="hero-meta">Digital resource &middot; Delivered instantly to your inbox &middot; Request by August 31</span>
+      </div>
+
+      <div class="hero-visual">
+        <div class="book-cover-wrap">
+          <img src="hebrews-christ-is-better.jpg" alt="Hebrews: Christ Is Better — sermon transcripts from Pastor J.D. Greear, shown on a tablet" />
+          <span class="book-badge">Digital &middot; August 2026</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust">
+    <div class="trust-inner">
+      <span class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Any gift amount qualifies
+      </span>
+      <span class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Delivered instantly to your inbox
+      </span>
+      <span class="trust-item">
+        <svg class="trust-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Helping fund gospel reach worldwide
+      </span>
+    </div>
+  </div>
+
+  <!-- DONATION SECTION — THE CLIMAX -->
+  <section class="donation-section" id="give">
+    <div class="donation-inner">
+
+      <div class="donation-copy">
+        <p class="donation-label">Give a Gift &middot; Get the Book</p>
+        <h2>Your gift spreads the gospel.<br>This resource is our <em>thank you.</em></h2>
+        <p class="donation-lead">
+          Your generosity makes it possible to share the gospel through radio, digital resources, and ministry partnerships around the world. When you give to Summit Life this month, we'll send you <strong>Hebrews: Christ Is Better</strong> &mdash; <em>delivered instantly to your inbox</em>, so you can start reading today.
+        </p>
+        <div class="donation-assurance">
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            Secure giving powered by GoFundMe Pro
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            501(c)(3) tax-deductible gift
+          </span>
+          <span>
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+            Instant digital delivery
+          </span>
+        </div>
+      </div>
+
+      <div class="donation-form">
+        <div id="classy-embed"></div>
+        <script>
+          ;(function (win) {
+            win.egProps = {
+              campaigns: [
+                {
+                  campaignId: '614304',
+                  donation: {
+                    inline: {
+                      urlParams: { },
+                      elementSelector: '#classy-embed'
+                    }
+                  }
+                }
+              ]
+            }
+            win.document.body.appendChild(makeEGScript())
+            function makeEGScript() {
+              var egScript = win.document.createElement('script')
+              egScript.setAttribute('type', 'text/javascript')
+              egScript.setAttribute('async', 'true')
+              egScript.setAttribute('src', 'https://sdk.classy.org/embedded-giving.js')
+              return egScript
+            }
+          })(window)
+        </script>
+        <p class="form-reassurance">Secure giving &middot; Tax-deductible &middot; The last day to request your copy is Monday, August 31</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INSIDE THE BOOK -->
+  <section class="inside">
+    <div class="inside-inner">
+      <div class="inside-header">
+        <p class="donation-label">Inside the Book</p>
+        <p class="inside-verse">
+          &ldquo;The writer of Hebrews has one basic message: Don't give up. Christ is better. Go all the way with him.&rdquo;
+          <cite>Pastor J.D. Greear &middot; Summit Life</cite>
+        </p>
+        <h2>Ten messages. One <em>better</em> Savior.</h2>
+        <p>The complete sermon transcripts from Pastor J.D.'s verse-by-verse study through Hebrews &mdash; gathered into one volume for personal study, reflection, and return visits.</p>
+      </div>
+
+      <!-- TODO: Daniel — chapter list derived from the ebook contents page. Confirm titles/passages. -->
+      <ul class="toc-list">
+        <li>
+          <span class="toc-num">i.</span>
+          <span class="toc-title">God's Final Word<span class="toc-ref">Hebrews 1:1&ndash;5</span></span>
+        </li>
+        <li>
+          <span class="toc-num">ii.</span>
+          <span class="toc-title">King, Champion, Brother, and Priest<span class="toc-ref">Hebrews 2:5&ndash;18</span></span>
+        </li>
+        <li>
+          <span class="toc-num">iii.</span>
+          <span class="toc-title">Finding Inner Rest<span class="toc-ref">Hebrews 4:1&ndash;13</span></span>
+        </li>
+        <li>
+          <span class="toc-num">iv.</span>
+          <span class="toc-title">Melchizedek<span class="toc-ref">Hebrews 5:1&ndash;6; 7:1&ndash;27</span></span>
+        </li>
+        <li>
+          <span class="toc-num">v.</span>
+          <span class="toc-title">Persevere<span class="toc-ref">Hebrews 6:1&ndash;20</span></span>
+        </li>
+        <li>
+          <span class="toc-num">vi.</span>
+          <span class="toc-title">No More Consciousness of Sins<span class="toc-ref">Hebrews 9:1&ndash;14, 27&ndash;28</span></span>
+        </li>
+        <li>
+          <span class="toc-num">vii.</span>
+          <span class="toc-title">Impossible Without Faith<span class="toc-ref">Hebrews 11:6, 17&ndash;40</span></span>
+        </li>
+        <li>
+          <span class="toc-num">viii.</span>
+          <span class="toc-title">The 4 Helps to Faith<span class="toc-ref">Hebrews 12:1&ndash;13</span></span>
+        </li>
+        <li>
+          <span class="toc-num">ix.</span>
+          <span class="toc-title">Finding the Unshakable City<span class="toc-ref">Hebrews 12:15&ndash;29</span></span>
+        </li>
+        <li>
+          <span class="toc-num">x.</span>
+          <span class="toc-title">Practical Christianity<span class="toc-ref">Hebrews 13:1&ndash;25</span></span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h3>Don't drift. <em>Draw near.</em></h3>
+    <p>Give a gift to Summit Life today, and we'll send Hebrews: Christ Is Better straight to your inbox.</p>
+    <a href="#give" class="hero-cta">
+      Give a gift and receive the book.
+      <svg viewBox="0 0 24 24"><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">J.D. Greear Ministries</div>
+    <p>
+      &copy; 2026 J.D. Greear Ministries. All rights reserved.<br>
+      <a href="#">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#">Contact</a>
+    </p>
+  </footer>
+
+  <p class="site-credit">
+    Learn more about J.D. Greear and Summit Life at
+    <a href="https://jdgreear.com" target="_blank" rel="noopener">jdgreear.com</a>
+  </p>
+
+</body>
+</html>
