@@ -392,8 +392,23 @@
       gap: 72px;
       align-items: center;
     }
-    .donation-copy { text-align: left; }
-    .donation-form { display: flex; flex-direction: column; justify-content: center; width: 100%; }
+    /* Grid/flex children default to min-width:auto, so they refuse to shrink below their
+       content's intrinsic width. The Classy widget has a ~420px floor, which was forcing
+       the whole column track to 420px and dragging the copy off-screen on phones.
+       min-width:0 lets the track shrink to the viewport; the form scrolls inside its own
+       box instead of widening the page. */
+    .donation-inner > * { min-width: 0; }
+    .donation-copy { text-align: left; min-width: 0; }
+    .donation-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
     .donation-label {
       font-size: 12px;
       font-weight: 800;
