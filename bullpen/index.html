@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<!-- DEPLOY TARGET: two-column panel (origin + email capture side by side).
+     index-separate-bands.html holds the alternate layout — origin and signup as
+     separate full-width bands — kept for reference, not deployed.
+     Kept in sync with it apart from the panel layout, the single-row hero CTAs,
+     the notify-focus script, and the origin column's wider text measure. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bullpen with J.D. Greear — the conversation after the sermon</title>
+<meta name="description" content="The Bullpen with J.D. Greear — a new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<link rel="canonical" href="https://bullpen.jdgreear.com/">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="J.D. Greear Ministries">
+<meta property="og:title" content="The Bullpen with J.D. Greear">
+<meta property="og:description" content="A new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<meta property="og:url" content="https://bullpen.jdgreear.com/">
+<meta property="og:image" content="https://bullpen.jdgreear.com/img/bullpen-og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Bullpen with J.D. Greear">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Bullpen with J.D. Greear">
+<meta name="twitter:description" content="A new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<meta name="twitter:image" content="https://bullpen.jdgreear.com/img/bullpen-og-1200x630.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/bullpen-hero-1600.jpg"
+      imagesrcset="img/bullpen-hero-800.jpg 800w, img/bullpen-hero-1200.jpg 1200w, img/bullpen-hero-1600.jpg 1600w, img/bullpen-hero-2300.jpg 2300w"
+      imagesizes="(max-width: 1360px) 100vw, 1360px" fetchpriority="high">
+
+<style>
+  :root{
+    /* Sampled directly from the cover art */
+    --ink:        #191816;   /* the artwork's own background — lets the image bleed */
+    --ink-2:      #232120;
+    --cyan:       #00C8EE;   /* the "J.D. GREEAR" cyan */
+    --cyan-press: #00A6C6;
+    --cyan-text:  #007391;   /* accessible cyan for text on light backgrounds */
+
+    --paper:      #FAF8F5;
+    --white:      #FFFFFF;
+    --body:       #26241F;
+    --muted:      #6E6A62;
+    --rule:       #E4DFD8;
+
+    /* Logo tint — echoes the cyan "J.D. GREEAR" in the cover lockup.
+       For a flat-white mark instead, set --logo-secondary to #FFFFFF. */
+    --logo-primary:   #FFFFFF;
+    --logo-secondary: #00C8EE;
+
+    --display: 'Oswald', 'Arial Narrow', sans-serif;
+    /* Body face pulled from jdgreear.com — the live site runs IBM Plex Sans at 18px/1.6 */
+    --text:    'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono:    'IBM Plex Mono', ui-monospace, monospace;
+
+    --measure: 64ch;
+    --wrap: 1120px;
+    --pad: clamp(20px, 5vw, 48px);
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--body);
+    font-family:var(--text); font-size:18px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block}
+  a{color:inherit}
+
+  .wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:var(--pad)}
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:var(--mono); font-size:.72rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--cyan); margin:0 0 1.1rem;
+  }
+  .eyebrow--dark{color:var(--cyan-text)}
+  /* Section-heading eyebrow. In the merged panel the origin column has no H2 — this
+     line is the column's heading, doing more work than the kicker above the signup
+     form, so it carries more weight. Tracking eases a touch as the size grows. */
+  .eyebrow--section{
+    font-size:.85rem; font-weight:500; letter-spacing:.14em;
+  }
+  /* Hero lead-in. The cover art carries the wordmark, so there is no visible H1 —
+     this line does the visible work of introducing the subhead. Scaled up from the
+     kicker size, with tracking eased off as it grows (.16em reads as noise at this
+     size). Stays in the mono utility face: it's still an eyebrow, not a headline.
+     Sized to stay above the subhead at every width — a lead-in that renders smaller
+     than the line beneath it just reads as a kicker again. Capped well short of
+     headline scale: the brief keeps headlines out of the mono face. */
+  .eyebrow--lead{
+    font-size:clamp(1.15rem, 2.4vw, 1.5rem);
+    letter-spacing:.09em; font-weight:500; line-height:1.3;
+    margin:0 0 .6rem;
+  }
+
+  h1,h2,h3{font-family:var(--display); font-weight:700; text-transform:uppercase;
+           letter-spacing:.005em; line-height:.98; margin:0}
+  h1{font-size:clamp(2.1rem, 5.2vw, 3.6rem)}
+  h2{font-size:clamp(1.7rem, 3.6vw, 2.6rem)}
+  h3{font-size:1.05rem; letter-spacing:.05em; line-height:1.25}
+
+  .lede{font-size:clamp(1.02rem,1.6vw,1.16rem); line-height:1.6; max-width:58ch}
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; overflow:hidden;
+    clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+  }
+  .skip{
+    position:absolute; left:-9999px; top:0; z-index:10;
+    background:var(--cyan); color:var(--ink); padding:12px 18px;
+    font-family:var(--mono); font-size:.75rem; letter-spacing:.1em; text-transform:uppercase;
+  }
+  .skip:focus{left:8px; top:8px}
+
+  /* ---------- brand bar ---------- */
+  /* Same #191816 as the hero, so it reads as one continuous dark field
+     and the artwork still dissolves into the page. */
+  .brandbar{background:var(--ink)}
+  .brandbar .wrap{padding-block:22px}
+  .brandbar svg{height:26px; width:auto; display:block}
+  .brandbar a{display:inline-block}
+
+  /* ---------- hero ---------- */
+  .hero{background:var(--ink); color:var(--white); padding-bottom:clamp(48px,7vw,80px)}
+  .hero__art{max-width:1360px; margin-inline:auto}
+  .hero__art img{width:100%; height:auto}
+  .hero__copy{max-width:var(--wrap); margin-inline:auto;
+              padding:clamp(28px,4vw,44px) var(--pad) 0}
+  .hero h1{max-width:19ch}
+  .hero h1 em{font-style:normal; color:var(--cyan)}
+  .hero__sub{color:#C9C4BC; margin:1.15rem 0 0; max-width:56ch}
+
+  /* ---------- listen buttons ---------- */
+  .listen{display:flex; flex-wrap:wrap; gap:12px; margin-top:2rem}
+  .btn{
+    display:inline-flex; align-items:center; gap:.6rem;
+    font-family:var(--display); font-weight:600; text-transform:uppercase;
+    letter-spacing:.06em; font-size:.92rem; line-height:1;
+    padding:15px 24px; border-radius:2px; text-decoration:none;
+    border:1.5px solid transparent; transition:background .16s, color .16s, border-color .16s;
+  }
+  .btn--primary{background:var(--cyan); color:var(--ink); border-color:var(--cyan)}
+  .btn--primary:hover{background:var(--cyan-press); border-color:var(--cyan-press)}
+  .btn--ghost{border-color:#4A4742; color:var(--white)}
+  .btn--ghost:hover{border-color:var(--cyan); color:var(--cyan)}
+  .btn svg{width:17px; height:17px; flex:none}
+
+  .hero__note{
+    font-family:var(--mono); font-size:.74rem; letter-spacing:.09em;
+    text-transform:uppercase; color:#8C877F; margin:1.5rem 0 0;
+  }
+
+  /* ---------- merged panel: origin + email capture ---------- */
+  /* Mobile-first: one column, each half full-bleed and stacked.
+     No border between halves — the white/ink change does the separating, which keeps
+     the page's undecorated, edge-to-edge rhythm. */
+  .panel{display:grid}
+  .panel__col{padding:clamp(44px,7vw,84px) var(--pad)}
+  .panel__origin{background:var(--white)}
+  .panel__signup{background:var(--ink); color:var(--white)}
+  .panel__inner{max-width:var(--measure)}
+
+  .panel__origin p{margin:0 0 1.15rem; max-width:var(--measure)}
+  .panel__origin p:last-child{margin-bottom:0}
+  .panel__origin strong{font-weight:600}
+
+  @media(min-width:900px){
+    /* Deliberately NOT align-items:start — the columns must stretch to a shared
+       height, or the shorter one's background stops early and leaves a strip of
+       paper showing under it. Content still sits top-aligned inside each half. */
+    .panel{grid-template-columns:1fr 1fr}
+    /* Cap each half's content at half the page wrap and push it toward the centre
+       line, so the two columns together span the same 1120px grid as the hero and
+       footer instead of drifting to the viewport edges on wide screens. */
+    /* wrap/2 minus the column's own gutter AND the page gutter, so the left column's
+       text starts on the same line as the hero copy and the right column's ends on the
+       same line as the footer. Subtracting only one --pad overshoots by 48px a side. */
+    .panel__inner{max-width:calc(var(--wrap) / 2 - var(--pad) * 2)}
+    /* The origin copy fills its column's own padding box rather than being capped to
+       half the page wrap. That reclaims the ~80px of white that was sitting to the
+       left of the text, and opens the measure from ~43 to ~50 characters.
+       Trade-off: this copy no longer starts on the same line as the hero copy above
+       it. To put that alignment back, delete this rule. */
+    .panel__origin .panel__inner{max-width:none; margin-inline-start:0}
+    .panel__signup .panel__inner{margin-inline-end:auto}
+  }
+
+  .signup__sub{color:#C9C4BC; margin:1rem 0 0; max-width:50ch}
+  .panel__signup h2{max-width:16ch}
+  .form{display:flex; gap:10px; flex-wrap:wrap; margin-top:2rem; max-width:560px}
+  .form input[type=email]{
+    flex:1 1 260px; min-width:0; padding:15px 16px; font:inherit; font-size:1rem;
+    color:var(--white); background:var(--ink-2);
+    border:1.5px solid #3B3833; border-radius:2px;
+  }
+  .form input[type=email]::placeholder{color:#807B73}
+  .form input[type=email]:focus{outline:none; border-color:var(--cyan)}
+  .form button{
+    font-family:var(--display); font-weight:600; text-transform:uppercase;
+    letter-spacing:.06em; font-size:.92rem; padding:15px 26px; cursor:pointer;
+    background:var(--cyan); color:var(--ink); border:1.5px solid var(--cyan);
+    border-radius:2px; transition:background .16s;
+  }
+  .form button:hover{background:var(--cyan-press)}
+  .fineprint{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em;
+             color:#8C877F; margin:1rem 0 0}
+
+  /* ---------- footer ---------- */
+  .foot{background:var(--white); border-top:1px solid var(--rule);
+        padding-block:36px; font-size:.85rem; color:var(--muted)}
+  .foot .wrap{display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+  .foot a{color:var(--muted)}
+
+  :where(a,button,input):focus-visible{outline:2px solid var(--cyan); outline-offset:3px}
+
+  .reveal{opacity:0; transform:translateY(12px); transition:opacity .6s ease, transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1; transform:none; transition:none}
+    *{scroll-behavior:auto !important}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="brandbar">
+  <div class="wrap">
+    <a href="https://jdgreear.com" aria-label="J.D. Greear Ministries">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 647.39 112" aria-hidden="true"><g><path d="M244.44,63.68l5.41-9.51a13.14,13.14,0,0,0,9.25,4.19,8.62,8.62,0,0,0,9.09-8.13v0a7.75,7.75,0,0,0,0-1.18V10.11h12.38V49.19c0,13.79-8.54,20.12-20.5,20.12A21.55,21.55,0,0,1,244.44,63.68Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M283.09,62.18a7.07,7.07,0,1,1,7.08,7.07h0A7.16,7.16,0,0,1,283.09,62.18Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M303.56,68.31V10.11h23c18.2,0,30.9,11.6,30.9,29.14s-12.66,29.07-30.9,29.07Zm41.19-29.07c0-10.3-6.29-18.2-18.2-18.2H316v36.4h10.54a17.41,17.41,0,0,0,18.2-16.58V39.24Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M355.4,62.18a7.07,7.07,0,1,1,7.08,7.07h0A7.15,7.15,0,0,1,355.4,62.18Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M383.15,39.26c0-18.4,14-30.1,31-30.1a27.23,27.23,0,0,1,24.09,13l-10.3,5.58a16.47,16.47,0,0,0-13.79-7.58,18.13,18.13,0,0,0-18.26,18v1.12A18.14,18.14,0,0,0,413,58.35h1.13a19.62,19.62,0,0,0,12.39-4.44v-7H411.17V36.11H439V58.45a32.3,32.3,0,0,1-24.78,11C397.11,69.45,383.15,57.58,383.15,39.26Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M448.44,68.3V26.14h11.09v5.75A18.13,18.13,0,0,1,473,25.08V35.93a14.23,14.23,0,0,0-13.42,4.53V68.29Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M477.18,47.18a21.46,21.46,0,0,1,20.82-22h1c12.56,0,21.07,9.42,21.07,23.21V50.8H488.77a11.36,11.36,0,0,0,12.13,9.78,18.09,18.09,0,0,0,11.26-4.25L517,63.49a26.26,26.26,0,0,1-17.37,5.84,21.35,21.35,0,0,1-22.49-20.12ZM499,33.91a10.14,10.14,0,0,0-10.37,9.34h20.75a9.77,9.77,0,0,0-10.14-9.35Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M525.36,47.18a21.45,21.45,0,0,1,20.81-22h1c12.57,0,21.08,9.42,21.08,23.21V50.8H537a11.39,11.39,0,0,0,12.13,9.78,18.09,18.09,0,0,0,11.26-4.25l4.88,7.16a26.25,26.25,0,0,1-17.36,5.84,21.35,21.35,0,0,1-22.49-20.12A19.69,19.69,0,0,1,525.36,47.18Zm21.81-13.27a10.14,10.14,0,0,0-10.38,9.34h20.76a9.78,9.78,0,0,0-10.17-9.35Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M601.62,68.3V63.93a17.38,17.38,0,0,1-13.31,5.41A14,14,0,0,1,573.66,56v-.6c0-9.85,7.93-13.61,14.66-13.61a17.28,17.28,0,0,1,13.34,5.15V41.24c0-4.27-3.66-7.06-9.24-7.06a17.69,17.69,0,0,0-12.3,5l-4.26-7.41a27.53,27.53,0,0,1,18.41-6.63c9.58,0,18.41,3.83,18.41,16V68.3Zm0-10.13V52.94a11.13,11.13,0,0,0-8.9-3.67c-4.36,0-7.94,2.27-7.94,6.37,0,3.93,3.58,6.2,7.94,6.2A11.05,11.05,0,0,0,601.62,58.17Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M623.7,68.3V26.14h11.08v5.75a18.16,18.16,0,0,1,13.42-6.81V35.93a14.26,14.26,0,0,0-13.42,4.53V68.29Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/></g><path d="M272.86,114V90.23L263,114h-1.47L251.8,90.23V114h-3.59V85.12h5.15l8.95,21.71,9-21.71h5.15V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M285.08,88a2.19,2.19,0,1,1,4.37-.16.43.43,0,0,1,0,.16,2.19,2.19,0,0,1-2.26,2.1h0A2.2,2.2,0,0,1,285.08,88Zm.56,26V93.09h3.25V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M312.06,114V100.3c0-3.67-1.87-4.84-4.68-4.84a8,8,0,0,0-6.18,3.24V114H298V93.08h3.25v3a10.3,10.3,0,0,1,7.44-3.55,6,6,0,0,1,6.7,5.07v0a5.77,5.77,0,0,1,0,1.66V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M323.8,88A2.19,2.19,0,1,1,326,90.13h0A2.19,2.19,0,0,1,323.8,88Zm.57,26V93.09h3.23V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M334.86,111.2l1.68-2.33a9.46,9.46,0,0,0,6.88,3c3.2,0,4.93-1.52,4.93-3.59,0-2.29-2.55-2.88-5.36-3.59-3.54-.82-7.57-1.77-7.57-6.1,0-3.24,2.81-6,7.79-6a10.56,10.56,0,0,1,7.73,3l-1.51,2.24a8.13,8.13,0,0,0-6.23-2.63c-2.87,0-4.63,1.43-4.63,3.28s2.38,2.55,5.11,3.2c3.63.83,7.83,1.87,7.83,6.49,0,3.51-2.82,6.31-8.22,6.31A11.06,11.06,0,0,1,334.86,111.2Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M360,109.6V95.94h-3.46V93.06H360V87.31h3.24v5.75h4.23v2.88h-4.24v13c0,1.56.69,2.67,2.12,2.67a3.11,3.11,0,0,0,2.2-.87l1,2.42a5.31,5.31,0,0,1-3.9,1.34,4.26,4.26,0,0,1-4.64-3.83A3.62,3.62,0,0,1,360,109.6Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M374.67,114V93.08h3.25v3.37a8.89,8.89,0,0,1,7-3.83V96a6.23,6.23,0,0,0-1.3-.12,7.62,7.62,0,0,0-5.66,3.32V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M391,88a2.19,2.19,0,1,1,2.18,2.18h0A2.19,2.19,0,0,1,391,88Zm.56,26V93.09h3.27V114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M402.63,103.5a10.44,10.44,0,0,1,9.93-10.93h.36c6.31,0,10,4.94,10,11.21v.82H406a7.37,7.37,0,0,0,7.51,7.22h0a9.21,9.21,0,0,0,6.45-2.64l1.55,2.11a11.25,11.25,0,0,1-8.3,3.2,10.35,10.35,0,0,1-10.65-10v0C402.6,104.13,402.61,103.81,402.63,103.5Zm10.24-8.26a7,7,0,0,0-6.83,7h13.71a6.77,6.77,0,0,0-6.58-6.94h-.3Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M428.93,111.2l1.7-2.33a9.42,9.42,0,0,0,6.87,3c3.2,0,4.93-1.52,4.93-3.59,0-2.29-2.55-2.88-5.36-3.59-3.55-.82-7.57-1.77-7.57-6.1,0-3.24,2.82-6,7.79-6a10.56,10.56,0,0,1,7.74,3l-1.52,2.24a8.1,8.1,0,0,0-6.22-2.63c-2.88,0-4.63,1.43-4.63,3.28s2.38,2.55,5.1,3.2c3.63.83,7.82,1.87,7.82,6.49,0,3.51-2.8,6.31-8.21,6.31A11.1,11.1,0,0,1,428.93,111.2Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/><path d="M159.67,114,80.32,23,.8,114Z" transform="translate(-0.8 -2.5)" fill="var(--logo-secondary)"/><path d="M127.5,2.5,109.63,23.1,188.44,114h35.92Z" transform="translate(-0.8 -2.5)" fill="var(--logo-primary)"/></svg>
+    </a>
+  </div>
+</div>
+
+<main id="main">
+<header class="hero">
+  <div class="hero__art">
+    <img src="img/bullpen-hero-1600.jpg"
+         srcset="img/bullpen-hero-800.jpg 800w,
+                 img/bullpen-hero-1200.jpg 1200w,
+                 img/bullpen-hero-1600.jpg 1600w,
+                 img/bullpen-hero-2300.jpg 2300w"
+         sizes="(max-width: 1360px) 100vw, 1360px"
+         alt="J.D. Greear seated at a podcast microphone, smiling"
+         width="2300" height="1350"
+         fetchpriority="high" decoding="async">
+  </div>
+  <div class="hero__copy reveal">
+    <!-- The cover art carries "THE BULLPEN" as a wordmark, so the visible headline
+         would be redundant. The H1 stays in the markup, visually hidden, so crawlers
+         and screen readers still get the show name as a real heading — a JPG can't
+         provide one. Note the image alt describes the photograph rather than repeating
+         this text, so assistive tech doesn't announce the title twice. -->
+    <h1 class="visually-hidden">The Bullpen with J.D. Greear</h1>
+    <p class="eyebrow eyebrow--lead">New podcast launching August 24</p>
+    <p class="lede hero__sub">After each sermon, Pastor J.D. will sit down and have a conversation unpacking the sermon, the hard questions, and how to live a gospel-centered life.</p>
+    <!-- Primary CTA plus the platform links share one row. The primary anchors to the
+         merged panel and also focuses the email field — see the script at the bottom.
+         Platform links: swap the href placeholders for the real show URLs. At launch,
+         give YouTube .btn--primary and demote "Notify Me at Launch" to ghost. -->
+    <div class="listen">
+      <a class="btn btn--primary" href="#stay" data-cta="notify">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+        Notify Me at Launch
+      </a>
+      <a class="btn btn--ghost" href="https://www.youtube.com/@j.d.greear" data-cta="platform" data-platform="youtube">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/></svg>
+        Watch on YouTube
+      </a>
+      <a class="btn btn--ghost" href="https://open.spotify.com/show/17CEtwPDyfMEypnBMZhO1y" data-cta="platform" data-platform="spotify">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm5.5 17.3a.75.75 0 0 1-1 .25c-2.8-1.7-6.4-2.1-10.6-1.1a.75.75 0 1 1-.34-1.46c4.6-1.05 8.6-.6 11.7 1.3.35.22.46.68.24 1.01zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.2-1.97-8.08-2.54-11.87-1.4a.94.94 0 1 1-.54-1.8c4.33-1.3 9.7-.66 13.38 1.6.44.27.58.85.32 1.29zm.13-3.4C15.26 8.35 8.9 8.14 5.24 9.25a1.12 1.12 0 1 1-.65-2.15c4.2-1.27 11.22-1.03 15.65 1.6a1.12 1.12 0 1 1-1.14 1.93z"/></svg>
+        Spotify
+      </a>
+      <a class="btn btn--ghost" href="https://podcasts.apple.com/us/podcast/the-bullpen-with-j-d-greear/id1439220729" data-cta="platform" data-platform="apple">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0a12 12 0 0 0-2.2 23.8v-3.4c0-.6.14-.9.44-1.2A9.3 9.3 0 0 1 12 18.9c.7 0 1.3.1 1.76.3.3.3.44.6.44 1.2v3.4A12 12 0 0 0 12 0zm0 4.6a3.1 3.1 0 1 1 0 6.2 3.1 3.1 0 0 1 0-6.2zm0 7.6c1.6 0 2.9.5 2.9 2 0 1.1-.4 3.3-.7 4.3-.2.7-1.2 1.2-2.2 1.2s-2-.5-2.2-1.2c-.3-1-.7-3.2-.7-4.3 0-1.5 1.3-2 2.9-2z"/></svg>
+        Apple Podcasts
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- Merged panel: origin copy (white) and email capture (ink) side by side on desktop,
+     stacked on mobile. The two halves bleed to the viewport edges; their inner content
+     is capped at half the page wrap and pushed toward the centre line, so the combined
+     text block still lines up with the 1120px grid the rest of the page uses. -->
+<section class="panel" id="stay">
+  <div class="panel__col panel__origin reveal">
+    <div class="panel__inner">
+      <p class="eyebrow eyebrow--dark eyebrow--section">Why we call it the bullpen</p>
+      <p style="margin-top:1.4rem">For years, whenever Pastor J.D. prepares a message, he writes far more than he can actually say. The extra illustrations, the rabbit trails, the good questions he doesn't have time to chase, the ideas that don't make the final cut — all of it gets kept in one section of his notes he calls <strong>the bullpen</strong>.</p>
+      <p>This podcast is built around those conversations. After J.D. preaches, he sits down with a few friends to unpack the message further — going deeper into the passage, wrestling with the hard questions, and exploring the implications there simply wasn't room to address on Sunday.</p>
+      <p>It isn't a sermon recap or a scripted teaching podcast. It's a free-flowing conversation about Scripture, theology, culture, and the questions Christians are actually wrestling with.</p>
+    </div>
+  </div>
+
+  <div class="panel__col panel__signup reveal">
+    <div class="panel__inner">
+    <p class="eyebrow">Stay in the loop</p>
+    <h2>Get each new episode in your inbox.</h2>
+    <p class="lede signup__sub">Get notified when a new episode drops, plus Pastor J.D.'s regular updates.</p>
+
+    <!-- Mailchimp embedded form — jdgreear us14 audience, Bullpen tag 40131727.
+         Deliberately the "naked" version of Mailchimp's embed: their classic-061523.css
+         and inline block force width:600px and 14px Helvetica onto the section, which
+         would flatten this design. Field names, action, tag and honeypot are byte-for-byte
+         from the real embed, so the POST is identical — only the styling is ours.
+         Mailchimp's mc-validate.js is intentionally not loaded: its snippet calls
+         jQuery.noConflict() and there is no jQuery on this page, so it would throw.
+         Native type="email" + required covers validation. -->
+    <form class="form"
+          action="https://jdgreear.us14.list-manage.com/subscribe/post?u=283ad80a7bcac13b222ef95d1&amp;id=009733a9e6&amp;f_id=00a6b3e0f0"
+          method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+          target="_blank">
+      <label for="mce-EMAIL" class="visually-hidden">Email address</label>
+      <input id="mce-EMAIL" name="EMAIL" type="email" placeholder="you@example.com"
+             autocomplete="email" class="required email" required>
+      <!-- Bullpen segment -->
+      <input type="hidden" name="tags" value="40131727">
+      <!-- Mailchimp bot-trap: must stay empty and must not be hidden with display:none -->
+      <div aria-hidden="true" style="position:absolute; left:-5000px">
+        <input type="text" name="b_283ad80a7bcac13b222ef95d1_009733a9e6" tabindex="-1" value="">
+      </div>
+      <button type="submit" name="subscribe" value="Subscribe" data-cta="signup">Sign me up</button>
+    </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 J.D. Greear Ministries</span>
+    <span><a href="https://jdgreear.com">jdgreear.com</a> · <a href="https://jdgreear.com/privacy-policy/">Privacy</a> · <a href="https://jdgreear.com/contact/">Contact</a></span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "The Bullpen",
+  "alternateName": "The Bullpen with J.D. Greear",
+  "url": "https://bullpen.jdgreear.com/",
+  "description": "After each sermon, Pastor J.D. Greear sits down and has a conversation unpacking the sermon, the hard questions, and how to live a gospel-centered life.",
+  "image": "https://bullpen.jdgreear.com/img/bullpen-og-1200x630.jpg",
+  "inLanguage": "en",
+  "author": { "@type": "Person", "name": "J.D. Greear" },
+  "publisher": { "@type": "Organization", "name": "J.D. Greear Ministries", "url": "https://jdgreear.com" },
+  "sameAs": [
+    "https://www.youtube.com/@j.d.greear",
+    "https://open.spotify.com/show/17CEtwPDyfMEypnBMZhO1y",
+    "https://podcasts.apple.com/us/podcast/the-bullpen-with-j-d-greear/id1439220729"
+  ]
+}
+</script>
+
+<script>
+  /* Scroll reveal — the only motion on the page, gated by prefers-reduced-motion in CSS */
+  const io = new IntersectionObserver((es) => {
+    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* "Notify Me at Launch" anchors to the panel and drops the cursor in the email
+     field. preventScroll:true lets the browser's own anchor jump decide where the
+     page lands — without it, focusing scrolls the input to the top of the viewport
+     and the panel heading gets skipped past. */
+  document.querySelectorAll('a[href="#stay"]').forEach(a => {
+    a.addEventListener('click', () => {
+      const email = document.getElementById('mce-EMAIL');
+      if (email) requestAnimationFrame(() => email.focus({ preventScroll: true }));
+    });
+  });
+
+  /* GA4 events — no-ops until gtag is present */
+  document.querySelectorAll('[data-cta]').forEach(el => {
+    el.addEventListener('click', () => {
+      if (typeof gtag !== 'function') return;
+      const kind = el.dataset.cta;
+      if (kind === 'platform') {
+        gtag('event', 'platform_cta_click', { platform: el.dataset.platform, location: 'hero' });
+      } else if (kind === 'notify') {
+        gtag('event', 'notify_cta_click', { location: 'hero' });
+      } else if (kind === 'signup') {
+        gtag('event', 'email_signup_submit', { location: 'signup_section' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
