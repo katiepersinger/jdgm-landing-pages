@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<!-- DEPLOY TARGET: two-column panel (origin + email capture side by side).
-     index-separate-bands.html holds the alternate layout — origin and signup as
-     separate full-width bands — kept for reference, not deployed.
-     Kept in sync with it apart from the panel layout, the single-row hero CTAs,
-     the notify-focus script, and the origin column's wider text measure. -->
+<!-- DEPLOY TARGET, post-launch version — went live 24 Aug 2026.
+     index-pre-launch.html holds the earlier pre-launch page (evergreen-copy-free,
+     no episodes section) — archived, not deployed.
+     Adds an episodes section sourced from a dedicated YouTube playlist — NOT the
+     channel uploads feed, which also carries Summit Life sermons. The playlist is
+     read at build/cron time by fetch-episodes.py into episodes.json; this page only
+     ever reads that local JSON file, never the YouTube API directly, so no API key
+     is exposed client-side. See EPISODES-SETUP.md for the API key and playlist ID
+     this needs before it can show real episodes. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Bullpen with J.D. Greear — the conversation after the sermon</title>
-<meta name="description" content="The Bullpen with J.D. Greear — a new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<meta name="description" content="The Bullpen with J.D. Greear — after each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
 <link rel="canonical" href="https://bullpen.jdgreear.com/">
 
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="J.D. Greear Ministries">
 <meta property="og:title" content="The Bullpen with J.D. Greear">
-<meta property="og:description" content="A new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<meta property="og:description" content="After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
 <meta property="og:url" content="https://bullpen.jdgreear.com/">
 <meta property="og:image" content="https://bullpen.jdgreear.com/img/bullpen-og-1200x630.jpg">
 <meta property="og:image:width" content="1200">
@@ -24,7 +28,7 @@
 <meta property="og:image:alt" content="The Bullpen with J.D. Greear">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Bullpen with J.D. Greear">
-<meta name="twitter:description" content="A new podcast launching August 24. After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
+<meta name="twitter:description" content="After each sermon, J.D. sits down to unpack the message, the hard questions, and how to live a gospel-centered life.">
 <meta name="twitter:image" content="https://bullpen.jdgreear.com/img/bullpen-og-1200x630.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -213,6 +217,68 @@
   .fineprint{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em;
              color:#8C877F; margin:1rem 0 0}
 
+  /* ---------- episodes ---------- */
+  /* Sits on --paper rather than --white so it reads as its own section between the
+     dark hero and the panel's white column, without introducing a new color. */
+  .episodes{padding-block:clamp(56px,7vw,96px); background:var(--paper)}
+  .episodes__head{max-width:var(--measure); margin-bottom:clamp(28px,4vw,44px)}
+  .episodes__grid{display:grid; gap:24px; grid-template-columns:1fr}
+  @media(min-width:640px){
+    .episodes__grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(min-width:900px){
+    .episodes__grid{grid-template-columns:repeat(3,1fr)}
+  }
+  /* Single-episode layout — temporary, while there's only one episode to show.
+     Uses a compound selector (.episodes__grid.episodes__grid--single) rather than
+     relying on source order, so its grid-template-columns reliably beats the
+     responsive multi-column rules above regardless of where either rule sits in
+     the stylesheet. Once EPISODES_TO_SHOW goes back above 1, the JS stops applying
+     this class and the grid reverts to its normal 1/2/3-column layout on its own —
+     nothing here needs to be deleted or reverted by hand. */
+  .episodes__grid.episodes__grid--single{
+    grid-template-columns:1fr; max-width:720px; margin-inline:auto;
+  }
+  .episodes__grid--single .episode-card__title{font-size:1.35rem}
+  .episodes__grid--single .episode-card__thumb-label{font-size:.78rem}
+  .episodes__grid--single .episode-card__play svg{width:64px; height:64px}
+  .episodes__grid--single .episode-card__duration{font-size:.8rem; padding:4px 9px}
+  .episodes__grid--single .episode-card--placeholder .episode-card__thumb svg{width:48px; height:48px}
+
+  .episode-card{display:block; text-decoration:none; color:inherit}
+  .episode-card__thumb{
+    position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:2px;
+    background:var(--ink);
+  }
+  .episode-card__thumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .episode-card__play{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    opacity:.85; transition:opacity .16s;
+  }
+  .episode-card__play svg{width:44px; height:44px; color:var(--cyan);
+                           filter:drop-shadow(0 1px 4px rgba(0,0,0,.35))}
+  .episode-card:hover .episode-card__play,
+  .episode-card:focus-visible .episode-card__play{opacity:1}
+  .episode-card__duration{
+    position:absolute; right:8px; bottom:8px;
+    font-family:var(--mono); font-size:.7rem; letter-spacing:.04em;
+    background:rgba(25,24,22,.85); color:var(--white);
+    padding:3px 7px; border-radius:2px;
+  }
+  .episode-card__title{margin-top:.85rem; font-size:.98rem}
+  /* Placeholder tiles (no real episode data yet) use the same card shape but read
+     as an obvious "fill this in" state rather than a real thumbnail — no external
+     image URL to fake, no fabricated title that could ship by accident. */
+  .episode-card--placeholder .episode-card__thumb{
+    display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px;
+  }
+  .episode-card--placeholder .episode-card__thumb svg{width:28px; height:28px; color:#4A4742}
+  .episode-card--placeholder .episode-card__thumb-label{
+    font-family:var(--mono); font-size:.68rem; letter-spacing:.1em;
+    text-transform:uppercase; color:#8C877F;
+  }
+  .episode-card--placeholder .episode-card__title{color:var(--muted)}
+
   /* ---------- footer ---------- */
   .foot{background:var(--white); border-top:1px solid var(--rule);
         padding-block:36px; font-size:.85rem; color:var(--muted)}
@@ -261,16 +327,16 @@
          provide one. Note the image alt describes the photograph rather than repeating
          this text, so assistive tech doesn't announce the title twice. -->
     <h1 class="visually-hidden">The Bullpen with J.D. Greear</h1>
-    <p class="eyebrow eyebrow--lead">New podcast launching August 24</p>
-    <p class="lede hero__sub">After each sermon, Pastor J.D. will sit down and have a conversation unpacking the sermon, the hard questions, and how to live a gospel-centered life.</p>
-    <!-- Primary CTA plus the platform links share one row. The primary anchors to the
-         merged panel and also focuses the email field — see the script at the bottom.
-         Platform links: swap the href placeholders for the real show URLs. At launch,
-         give YouTube .btn--primary and demote "Notify Me at Launch" to ghost. -->
+    <p class="eyebrow eyebrow--lead">Dig into the Word with J.D. Greear</p>
+    <p class="lede hero__sub">After each sermon, Pastor J.D. sits down for a conversation unpacking the message, the hard questions, and how to live a gospel-centered life.</p>
+    <!-- Primary CTA scrolls down to the episodes grid — no JS needed beyond the
+         native anchor jump, since there's no longer an email field to focus from here.
+         Platform links are unchanged secondary buttons; they still go straight to
+         each show page rather than this page's own content. -->
     <div class="listen">
-      <a class="btn btn--primary" href="#stay" data-cta="notify">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
-        Notify Me at Launch
+      <a class="btn btn--primary" href="#episodes" data-cta="watch_latest">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        Watch Latest Episode
       </a>
       <a class="btn btn--ghost" href="https://www.youtube.com/@j.d.greear" data-cta="platform" data-platform="youtube">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6z"/></svg>
@@ -287,6 +353,23 @@
     </div>
   </div>
 </header>
+
+<!-- Episodes grid. Populated client-side from episodes.json — a local file this
+     page reads, not the YouTube API directly (no API key belongs in this script).
+     episodes.json is produced by fetch-episodes.py against a Bullpen-specific
+     playlist (playlistItems, not the channel uploads feed — the channel also carries
+     Summit Life sermons, which must never show up here). If the file is missing or
+     the fetch fails for any reason, FALLBACK_EPISODES below renders instead, so this
+     section never sits empty. See EPISODES-SETUP.md. -->
+<section class="episodes" id="episodes">
+  <div class="wrap reveal">
+    <div class="episodes__head">
+      <p class="eyebrow eyebrow--dark eyebrow--section">Latest episode</p>
+      <h2>Watch the latest conversation.</h2>
+    </div>
+    <div class="episodes__grid" id="episodesGrid"></div>
+  </div>
+</section>
 
 <!-- Merged panel: origin copy (white) and email capture (ink) side by side on desktop,
      stacked on mobile. The two halves bleed to the viewport edges; their inner content
@@ -370,31 +453,105 @@
   }, { rootMargin: '0px 0px -8% 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* "Notify Me at Launch" anchors to the panel and drops the cursor in the email
-     field. preventScroll:true lets the browser's own anchor jump decide where the
-     page lands — without it, focusing scrolls the input to the top of the viewport
-     and the panel heading gets skipped past. */
-  document.querySelectorAll('a[href="#stay"]').forEach(a => {
-    a.addEventListener('click', () => {
-      const email = document.getElementById('mce-EMAIL');
-      if (email) requestAnimationFrame(() => email.focus({ preventScroll: true }));
-    });
-  });
-
   /* GA4 events — no-ops until gtag is present */
-  document.querySelectorAll('[data-cta]').forEach(el => {
-    el.addEventListener('click', () => {
-      if (typeof gtag !== 'function') return;
-      const kind = el.dataset.cta;
-      if (kind === 'platform') {
-        gtag('event', 'platform_cta_click', { platform: el.dataset.platform, location: 'hero' });
-      } else if (kind === 'notify') {
-        gtag('event', 'notify_cta_click', { location: 'hero' });
-      } else if (kind === 'signup') {
-        gtag('event', 'email_signup_submit', { location: 'signup_section' });
+  function trackCta(el) {
+    if (typeof gtag !== 'function') return;
+    const kind = el.dataset.cta;
+    if (kind === 'platform') {
+      gtag('event', 'platform_cta_click', { platform: el.dataset.platform, location: 'hero' });
+    } else if (kind === 'watch_latest') {
+      gtag('event', 'watch_latest_click', { location: 'hero' });
+    } else if (kind === 'signup') {
+      gtag('event', 'email_signup_submit', { location: 'signup_section' });
+    } else if (kind === 'episode') {
+      gtag('event', 'episode_click', { video_id: el.dataset.videoId, location: 'episodes_grid' });
+    }
+  }
+  document.querySelectorAll('[data-cta]').forEach(el => el.addEventListener('click', () => trackCta(el)));
+
+  /* ---------- episodes grid ---------- */
+  /* Only one episode exists right now, so only one shows — temporary. Bump
+     EPISODES_TO_SHOW back up (e.g. to 6) once there's more than one; the grid
+     returns to its normal responsive multi-column layout on its own once more
+     than one card renders (see .episodes__grid--single below). */
+  const EPISODES_TO_SHOW = 1;
+
+  /* Placeholder data only — no real episode has been fetched yet. videoId is
+     deliberately not a working ID: a placeholder that LOOKS like it might work is
+     more dangerous than one that obviously doesn't, since a fake-but-plausible entry
+     could ship to production unnoticed. Swap this for real data by running
+     fetch-episodes.py (see EPISODES-SETUP.md) — this array only renders if
+     episodes.json is missing or the fetch fails, exactly the failure path it exists
+     to cover. */
+  const FALLBACK_EPISODES = [
+    { videoId: null, title: 'REPLACE — add real episode data via fetch-episodes.py', duration: null, thumbnail: null, publishedAt: null },
+  ];
+
+  const PLAY_ICON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+  function buildEpisodeCard(ep) {
+    const isPlaceholder = !ep.videoId;
+    const el = document.createElement(isPlaceholder ? 'div' : 'a');
+    el.className = 'episode-card' + (isPlaceholder ? ' episode-card--placeholder' : '');
+    if (!isPlaceholder) {
+      el.href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(ep.videoId);
+      el.target = '_blank';
+      el.rel = 'noopener';
+      el.dataset.cta = 'episode';
+      el.dataset.videoId = ep.videoId;
+    }
+
+    const thumb = document.createElement('div');
+    thumb.className = 'episode-card__thumb';
+    if (ep.thumbnail) {
+      const img = document.createElement('img');
+      img.src = ep.thumbnail;
+      img.alt = '';
+      img.loading = 'lazy';
+      thumb.appendChild(img);
+      const play = document.createElement('span');
+      play.className = 'episode-card__play';
+      play.innerHTML = PLAY_ICON;
+      thumb.appendChild(play);
+      if (ep.duration) {
+        const dur = document.createElement('span');
+        dur.className = 'episode-card__duration';
+        dur.textContent = ep.duration;
+        thumb.appendChild(dur);
       }
+    } else {
+      thumb.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>'
+                       + '<span class="episode-card__thumb-label">Episode coming soon</span>';
+    }
+    el.appendChild(thumb);
+
+    const title = document.createElement('h3');
+    title.className = 'episode-card__title';
+    title.textContent = ep.title;
+    el.appendChild(title);
+
+    return el;
+  }
+
+  function renderEpisodes(list) {
+    const grid = document.getElementById('episodesGrid');
+    if (!grid) return;
+    const sorted = [...list].sort((a, b) => {
+      if (!a.publishedAt || !b.publishedAt) return 0;
+      return new Date(b.publishedAt) - new Date(a.publishedAt);
     });
-  });
+    const shown = sorted.slice(0, EPISODES_TO_SHOW);
+    grid.classList.toggle('episodes__grid--single', shown.length === 1);
+    grid.replaceChildren(...shown.map(buildEpisodeCard));
+  }
+
+  fetch('episodes.json', { cache: 'no-store' })
+    .then(r => { if (!r.ok) throw new Error('episodes.json not found'); return r.json(); })
+    .then(list => {
+      if (!Array.isArray(list) || list.length === 0) throw new Error('episodes.json empty');
+      renderEpisodes(list);
+    })
+    .catch(() => renderEpisodes(FALLBACK_EPISODES));
 </script>
 </body>
 </html>
